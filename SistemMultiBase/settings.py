@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'SistemMultiBase.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +81,38 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'postgresql_db',
+#        'USER': 'postgres_user',
+#        'PASSWORD': 'postgres_password',
+#        'HOST': 'ip_de_tu_servidor_postgresql',
+#        'PORT': '5432',
+#    },
+#    'mongodb': {
+#        'ENGINE': 'djongo',
+#        'NAME': 'mongodb_db',
+#        'CLIENT': {
+#            'host': 'ip_de_tu_servidor_mongodb',
+#            'port': 27017,
+#            'username': 'daniel',
+#            'password': 'belicon#1',
+#        }
+#    },
+#    'sql_server': {
+#        'ENGINE': 'sql_server.pyodbc',
+#        'NAME': 'sql_server_db',
+#        'HOST': 'ip_de_tu_servidor_sql_server',
+#        'PORT': '1433',
+#        'USER': 'sql_server_user',
+#        'PASSWORD': 'sql_server_password',
+#        'OPTIONS': {
+#            'driver': 'ODBC Driver 17 for SQL Server',
+#        },
+#    },
+#}
+#
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -116,7 +149,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
+MEDIA_URL = '/media/'
+#URL para acceder a la imagenes ya cargadas
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
