@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <style>
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .izquierda, .derecha {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .izquierda input, .derecha input {
+            width: 100%;
+            font-size: 20px;
+            color: white;
+            background-color: rgba(121, 100, 251, 1);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .izquierda input:hover, .derecha input:hover {
+            background-color: rgba(45, 53, 129, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="izquierda">
+            <a href="{% url 'registro' %}">
+                <input type="button" value="Registrarse a un curso">
+            </a>
+        </div>
+        <div class="derecha">
+            <a href=""><input type="button" value="Ver Cursos"></a>
+        </div>
+    </div>
+</body>
+</html>
