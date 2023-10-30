@@ -6,4 +6,5 @@ from .views import *
 urlpatterns = [
     url(r'^$',index, name="index"),
     path('index/',index, name="index"),
+    path('registro/',registro, name="registro"),
 ]
