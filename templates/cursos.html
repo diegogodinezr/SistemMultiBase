@@ -3,9 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro de Curso</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+            margin-right: 60px;
+        }
+        svg {
+            cursor: pointer;
+        }
+        .icon-tabler-arrow-left{
+            font-size: 45px;
+            float: left;
+            padding: 25px;
+        }
+        svg path:hover {
+            fill: rgba(45, 53, 129, 1);
+        }
+
+        section {
+            margin-top: 100px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: rgba(68, 2, 79, 1);
+            color: white;
+            position: relative;
+        }
+
+        th::after {
+            content: "  ▼"; 
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>cursos</h1>
+    <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 12l14 0" />
+            <path d="M5 12l6 6" />
+            <path d="M5 12l6 -6" />
+        </svg>
+        <h1>CURSOS</h1>
+    </nav>
+
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Curso</th>
+                    <th>Instructor</th>
+                    <th>Lugar</th>
+                    <th>Horas</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Curso 1</td>
+                    <td>Instructor 1</td>
+                    <td>Lugar 1</td>
+                    <td>20</td>
+                    <td>2023-11-01</td>
+                    <td>2023-12-01</td>
+                </tr>
+                <tr>
+                    <td>Curso 2</td>
+                    <td>Instructor 2</td>
+                    <td>Lugar 2</td>
+                    <td>15</td>
+                    <td>2023-11-15</td>
+                    <td>2023-12-15</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        const svgIcon = document.querySelector('.icon-tabler-arrow-left');
+        svgIcon.addEventListener('click', function() {
+            window.history.back();
+        });
+    </script>
 </body>
 </html>
+
