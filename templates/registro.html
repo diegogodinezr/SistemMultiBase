@@ -3,9 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro de Curso</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+            margin-right: 60px;
+        }
+        svg {
+            cursor: pointer;
+        }
+        .icon-tabler-arrow-left{
+            font-size: 45px;
+            float: left;
+            padding: 25px;
+        }
+        svg path:hover {
+            fill: rgba(45, 53, 129, 1);
+        }
+
+        section {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 40px;
+        }
+
+        select, input {
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        select {
+            border: 1px solid rgba(45, 53, 129, 1);
+            border-radius: 10px;
+            width: 30%;
+            margin-left: 35%;
+        }
+
+        input[type="date"] {
+            border: 1px solid rgba(45, 53, 129, 1);
+            border-radius: 10px;
+            width: 28%;
+            margin-left: 35%;
+        }
+
+        input[type="submit"] {
+            background-color: rgba(45, 53, 129, 1);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            width: 20%;
+            margin-left: 40%;
+        }
+        input[type="submit"]:hover {
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Registro</h1>
+    <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 12l14 0" />
+            <path d="M5 12l6 6" />
+            <path d="M5 12l6 -6" />
+        </svg>
+        <h1>CURSOS</h1>
+    </nav>
+    <section>
+        <form action="" id="cursoForm">
+            <h2>Registrar Curso</h2>
+            <select name="nombre" id="nombreCurso">
+                <option value="" disabled selected>Seleccione un curso</option>
+                <option value="Curso 1">Curso 1</option>
+                <option value="Curso 2">Curso 2</option>
+                <option value="Curso 3">Curso 3</option>
+            </select>
+            <select name="descripcion" id="nombreInstructor" disabled>
+                <option value="" disabled selected>Seleccione un instructor</option>
+                <option value="Instructor 1">Instructor 1</option>
+                <option value="Instructor 2">Instructor 2</option>
+                <option value="Instructor 3">Instructor 3</option>
+            </select>
+            <input type="date" name="imagen" placeholder="Fecha Inicio">
+            <input type="date" name="precio" placeholder="Fecha Fin">
+            <input type="submit" value="Publicar">
+        </form>
+    </section>
+
+    <script>
+        // Agrega un controlador de eventos de clic al SVG
+        const svgIcon = document.querySelector('.icon-tabler-arrow-left');
+        svgIcon.addEventListener('click', function() {
+            // Vuelve atrás en la historia del navegador
+            window.history.back();
+        });
+
+        // Agrega un controlador de eventos para habilitar/deshabilitar el campo de instructor
+        const nombreCursoInput = document.getElementById('nombreCurso');
+        const nombreInstructorInput = document.getElementById('nombreInstructor');
+        
+        nombreCursoInput.addEventListener('change', function() {
+            if (nombreCursoInput.value) {
+                nombreInstructorInput.removeAttribute('disabled');
+            } else {
+                nombreInstructorInput.setAttribute('disabled', 'disabled');
+            }
+        });
+    </script>
 </body>
 </html>
