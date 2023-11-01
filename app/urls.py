@@ -6,4 +6,5 @@ urlpatterns = [
     path('', index, name="index"),    # Utiliza path en lugar de url
     path('index/', index, name="index"),
     path('registro/', registro, name="registro"),
+    path('cursos/', cursos, name="cursos"),
 ]
