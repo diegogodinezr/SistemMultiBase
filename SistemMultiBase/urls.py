@@ -15,23 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url,include
+from django.urls import path, include, re_path  # Importa re_path
 
 import re
 from django.views.static import serve
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^', include('app.urls')),
+    re_path(r'^', include('app.urls')),  # Usa re_path en lugar de url
 ]
 
 if settings.STATIC_URL.startswith("/"):
-    urlpatterns+= [
-        url(
+    urlpatterns += [
+        re_path(
             r'^{STATIC_URL}(?P<path>.*)$'.format(STATIC_URL=re.escape(settings.STATIC_URL.lstrip('/'))),
             serve,
             {'document_root': settings.STATIC_ROOT},

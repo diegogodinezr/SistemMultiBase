@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <style>
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            background-color: rgba(68, 2, 79, 1);
+        }
         .container {
             display: flex;
             height: 100vh;
@@ -32,6 +39,9 @@
     </style>
 </head>
 <body>
+    <nav>
+        <h1>CURSOS</h1>
+    </nav>
     <div class="container">
         <div class="izquierda">
             <a href="{% url 'registro' %}">

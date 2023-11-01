@@ -102,11 +102,11 @@ DATABASES = {
 #    },
 #    'sql_server': {
 #        'ENGINE': 'sql_server.pyodbc',
-#        'NAME': 'sql_server_db',
-#        'HOST': 'ip_de_tu_servidor_sql_server',
+#        'NAME': 'instructores',
+#        'HOST': '25.59.146.27',
 #        'PORT': '1433',
-#        'USER': 'sql_server_user',
-#        'PASSWORD': 'sql_server_password',
+#        'USER': 'baseinstructor',
+#        'PASSWORD': '123',
 #        'OPTIONS': {
 #            'driver': 'ODBC Driver 17 for SQL Server',
 #        },

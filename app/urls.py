@@ -1,10 +1,9 @@
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url,include
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    url(r'^$',index, name="index"),
-    path('index/',index, name="index"),
-    path('registro/',registro, name="registro"),
+    path('', index, name="index"),    # Utiliza path en lugar de url
+    path('index/', index, name="index"),
+    path('registro/', registro, name="registro"),
 ]
