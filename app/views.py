@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import pyodbc
+import pymongo
 
 # Create your views here.
 def index(request):
@@ -26,4 +27,13 @@ def mostrarcursos(request):
     for row in rows:
         print(row)
 
-    return render(request, 'cursos.html', {'instructor': rows})
+    # Conexión a la base de datos MongoDB
+    mongo_client = pymongo.MongoClient('mongodb://daniel:belicon@25.10.16.136:27017/cursos')
+    db_mongo = mongo_client['cursos']
+    collection_mongo = db_mongo['curso']
+
+    cursos_mongo = list(collection_mongo.find())  # Recupera todos los documentos de la colección "curso"
+    print(cursos_mongo)
+
+    return render(request, 'cursos.html', {'instructor': rows, 'cursos': cursos_mongo})
+
