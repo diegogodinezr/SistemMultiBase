@@ -70,7 +70,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
             <path d="M5 12l14 0" />
-            <path d="M5 12l6 6" />
+            path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
         </svg>
         <h1>CURSOS</h1>
@@ -80,31 +80,23 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nombre Curso</th>
-                    <th>Instructor</th>
-                    <th>Lugar</th>
-                    <th>Horas</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
+                    <th>Nombre Instructor</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Curso 1</td>
-                    <td>Instructor 1</td>
-                    <td>Lugar 1</td>
-                    <td>20</td>
-                    <td>2023-11-01</td>
-                    <td>2023-12-01</td>
-                </tr>
-                <tr>
-                    <td>Curso 2</td>
-                    <td>Instructor 2</td>
-                    <td>Lugar 2</td>
-                    <td>15</td>
-                    <td>2023-11-15</td>
-                    <td>2023-12-15</td>
-                </tr>
+                {% for instructor in instructor %}
+                    <tr>
+                        <td>{{ instructor.Nombre }}</td>
+                        <td>{{ instructor.Primer_Apellido }}</td>
+                        <td>{{ instructor.Segundo_Apellido }}</td>
+                        <td>{{ instructor.Telefono }}</td>
+                        <td>{{ instructor.Correo }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </section>
@@ -117,4 +109,3 @@
     </script>
 </body>
 </html>
-

@@ -7,4 +7,5 @@ urlpatterns = [
     path('index/', index, name="index"),
     path('registro/', registro, name="registro"),
     path('cursos/', cursos, name="cursos"),
+    path('mostrarcursos/', mostrarcursos, name="mostrarcursos"),
 ]
