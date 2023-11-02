@@ -82,7 +82,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-    
 }
 
 
@@ -105,17 +104,7 @@ DATABASES = {
 #            'password': 'belicon#1',
 #        }
 #    },
-#    'sql_server': {
-#        'ENGINE': 'sql_server.pyodbc',
-#        'NAME': 'instructores',
-#        'HOST': '25.59.146.27',
-#        'PORT': '1433',
-#        'USER': 'baseinstructor',
-#        'PASSWORD': '123',
-#        'OPTIONS': {
-#            'driver': 'ODBC Driver 17 for SQL Server',
-#        },
-#    },
+#    
 #}
 #
 

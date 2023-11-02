@@ -101,6 +101,32 @@
         </table>
     </section>
 
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID del Curso</th>
+                    <th>Tema</th>
+                    <th>Cantidad Permitida</th>
+                    <th>Lugar</th>
+                    <th>Horas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in cursos %}
+                    <tr>
+                        <td>{{ curso.ID_Curso }}</td>
+                        <td>{{ curso.Tema }}</td>
+                        <td>{{ curso.Cantidad }}</td>
+                        <td>{{ curso.Lugar }}</td>
+                        <td>{{ curso.Horas }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    
+
     <script>
         const svgIcon = document.querySelector('.icon-tabler-arrow-left');
         svgIcon.addEventListener('click', function() {
