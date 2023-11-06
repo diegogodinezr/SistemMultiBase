@@ -55,3 +55,60 @@ def mostrarcursos(request):
 
     return render(request, 'cursos.html', {'instructor': rows, 'cursos': cursos_mongo})
 
+from django.shortcuts import render
+import psycopg2
+from psycopg2 import Error
+
+def mostrar_registros(request):
+    # Parámetros de conexión a la base de datos PostgreSQL
+    connection = psycopg2.connect(
+        user="basecurso",
+        password="123456",
+        host="25.56.243.144",
+        port="5432",
+        database="Registro"
+    )
+
+    registros = []
+
+    try:
+        # Crear un cursor para ejecutar operaciones con la base de datos
+        cursor = connection.cursor()
+
+        # Ejecutar consulta SQL para seleccionar cada atributo de la tabla registro_curso 
+        cursor.execute("SELECT id_registro, fecha_registro, id_instructor, id_curso, fecha_inicio, fecha_fin FROM registro_curso")
+        
+        # Verificar si hay resultados
+        if cursor.rowcount > 0:
+            # Obtener todos los registros
+            records = cursor.fetchall()
+
+            # Crear una lista de diccionarios para almacenar los registros
+            for row in records:
+                registro = {
+                    "id_registro": row[0],
+                    "fecha_registro": row[1],
+                    "id_instructor": row[2],
+                    "id_curso": row[3],
+                    "fecha_inicio": row[4],
+                    "fecha_fin": row[5]
+                }
+                registros.append(registro)
+        else:
+            print("No se encontraron resultados.")
+
+    except Error as e:
+        mensaje = f"Error al conectar a la base de datos PostgreSQL: {e}"
+        print(mensaje)
+
+    finally:
+        # Cerrar el cursor y la conexión si están definidos
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+    return render(request, 'mostrar_registros.html', {'registros': registros})
+
+
+ 

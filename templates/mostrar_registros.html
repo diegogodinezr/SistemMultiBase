@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Registros</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+            margin-right: 60px;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+
+        .icon-tabler-arrow-left{
+            font-size: 45px;
+            float: left;
+            padding: 25px;
+        }
+
+        svg path:hover {
+            fill: rgba(45, 53, 129, 1);
+        }
+
+        section {
+            margin-top: 100px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: rgba(68, 2, 79, 1);
+            color: white;
+            position: relative;
+        }
+
+        th::after {
+            content: "  ▼"; 
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Registro de Curso</h1>
+    </nav>
+
+    <section>
+        <table>
+            <tr>
+                <th>ID Registro</th>
+                <th>Fecha Registro</th>
+                <th>ID Instructor</th>
+                <th>ID Curso</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+            </tr>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.id_registro }}</td>
+                <td>{{ registro.fecha_registro }}</td>
+                <td>{{ registro.id_instructor }}</td>
+                <td>{{ registro.id_curso }}</td>
+                <td>{{ registro.fecha_inicio }}</td>
+                <td>{{ registro.fecha_fin }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</body>
+</html>
