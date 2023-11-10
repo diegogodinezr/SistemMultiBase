@@ -11,7 +11,7 @@ def registro(request):
     mongo_client = pymongo.MongoClient('mongodb://daniel:belicon@25.10.16.136:27017/cursos')
     db_mongo = mongo_client['cursos']
     collection_mongo = db_mongo['curso']
-    temas = [curso['Tema'] for curso in collection_mongo.find()]
+    infocurso = [{'id': curso['ID_Curso'], 'tema': curso['Tema']} for curso in collection_mongo.find()]
 
     # Código para obtener instructores de SQL Server
     server = '25.59.146.27'
@@ -21,10 +21,14 @@ def registro(request):
     connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
     conn = pyodbc.connect(connection_string)
     cursor = conn.cursor()
-    cursor.execute("SELECT CONCAT(Nombre, ' ', Primer_Apellido, ' ', Segundo_Apellido) AS NombreCompleto FROM Catalogo_instructores")
-    instructores = cursor.fetchall()
+    cursor.execute("SELECT ID_instructor, CONCAT(Nombre, ' ', Primer_Apellido, ' ', Segundo_Apellido) AS NombreCompleto FROM Catalogo_instructores")
+    rows = cursor.fetchall()
 
-    return render(request, 'registro.html', {'temas': temas, 'instructores': instructores})
+    # Crear una lista de diccionarios para almacenar los resultados
+    instructores = [{'ID_instructor': row.ID_instructor, 'NombreCompleto': row.NombreCompleto} for row in rows]
+
+    return render(request, 'registro.html', {'temas': infocurso, 'instructores': instructores})
+
 
 
 def cursos(request):
