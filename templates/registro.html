@@ -112,14 +112,15 @@
             <select name="nombre" id="nombreCurso">
                 <option value="" disabled selected>Seleccione un curso</option>
                 {% for tema in temas %}
-                    <option value="{{ tema }}">{{ tema }}</option>
+                    <option value="{{ tema.id }}">{{ tema.tema }}</option>
                 {% endfor %}
             </select>
+
             <label for="nombreInstructor">Instructor</label>
             <select name="descripcion" id="nombreInstructor" disabled>
                 <option value="" disabled selected>Seleccione un instructor</option>
                 {% for instructor in instructores %}
-                    <option value="{{ instructor.NombreCompleto }}">{{ instructor.NombreCompleto }}</option>
+                    <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
                 {% endfor %}
             </select>
             <label for="fechaInicio">Fecha de inicio</label>
