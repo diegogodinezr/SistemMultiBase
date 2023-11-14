@@ -68,9 +68,10 @@ def mostrar_registros(request):
     connection = psycopg2.connect(
         user="basecurso",
         password="123456",
-        host="25.56.243.144",
+        host="25.10.16.136",
         port="5432",
-        database="Registro"
+        database="registro",
+        client_encoding='UTF8'
     )
 
     registros = []
@@ -80,7 +81,7 @@ def mostrar_registros(request):
         cursor = connection.cursor()
 
         # Ejecutar consulta SQL para seleccionar cada atributo de la tabla registro_curso 
-        cursor.execute("SELECT id_registro, fecha_registro, id_instructor, id_curso, fecha_inicio, fecha_fin FROM registro_curso")
+        cursor.execute("SELECT * FROM registro_curso")
         
         # Verificar si hay resultados
         if cursor.rowcount > 0:
@@ -113,6 +114,3 @@ def mostrar_registros(request):
             connection.close()
 
     return render(request, 'mostrar_registros.html', {'registros': registros})
-
-
- 
