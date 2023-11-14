@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Curso</title>
+    <title>Mostrar Registros</title>
     <style>
         body {
             margin: 0;
@@ -22,14 +22,17 @@
             font-size: 45px;
             margin-right: 60px;
         }
+
         svg {
             cursor: pointer;
         }
+
         .icon-tabler-arrow-left{
             font-size: 45px;
             float: left;
             padding: 25px;
         }
+
         svg path:hover {
             fill: rgba(45, 53, 129, 1);
         }
@@ -73,60 +76,31 @@
             path d="M5 12l6 6" />
             <path d="M5 12l6 -6" />
         </svg>
-        <h1>CURSOS</h1>
+        <h1>Registro de Curso</h1>
     </nav>
 
     <section>
         <table>
-            <thead>
-                <tr>
-                    <th>Nombre Instructor</th>
-                    <th>Primer Apellido</th>
-                    <th>Segundo Apellido</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for instructor in instructor %}
-                    <tr>
-                        <td>{{ instructor.Nombre }}</td>
-                        <td>{{ instructor.Primer_Apellido }}</td>
-                        <td>{{ instructor.Segundo_Apellido }}</td>
-                        <td>{{ instructor.Telefono }}</td>
-                        <td>{{ instructor.Correo }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+            <tr>
+                <th>ID Registro</th>
+                <th>Fecha Registro</th>
+                <th>ID Instructor</th>
+                <th>ID Curso</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+            </tr>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.id_registro }}</td>
+                <td>{{ registro.fecha_registro }}</td>
+                <td>{{ registro.id_instructor }}</td>
+                <td>{{ registro.id_curso }}</td>
+                <td>{{ registro.fecha_inicio }}</td>
+                <td>{{ registro.fecha_fin }}</td>
+            </tr>
+            {% endfor %}
         </table>
     </section>
-
-    <section>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID del Curso</th>
-                    <th>Tema</th>
-                    <th>Cantidad Permitida</th>
-                    <th>Lugar</th>
-                    <th>Horas</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for curso in cursos %}
-                    <tr>
-                        <td>{{ curso.ID_Curso }}</td>
-                        <td>{{ curso.Tema }}</td>
-                        <td>{{ curso.Cantidad }}</td>
-                        <td>{{ curso.Lugar }}</td>
-                        <td>{{ curso.Horas }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
-    
-
     <script>
         const svgIcon = document.querySelector('.icon-tabler-arrow-left');
         svgIcon.addEventListener('click', function() {

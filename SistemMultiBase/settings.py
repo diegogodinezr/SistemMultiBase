@@ -74,12 +74,16 @@ WSGI_APPLICATION = 'SistemMultiBase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 #DATABASES = {
 #    'default': {
@@ -92,25 +96,15 @@ DATABASES = {
 #    },
 #    'mongodb': {
 #        'ENGINE': 'djongo',
-#        'NAME': 'mongodb_db',
+#        'NAME': 'cursos',
 #        'CLIENT': {
-#            'host': 'ip_de_tu_servidor_mongodb',
+#            'host': '25.56.240.185',
 #            'port': 27017,
 #            'username': 'daniel',
 #            'password': 'belicon#1',
 #        }
 #    },
-#    'sql_server': {
-#        'ENGINE': 'sql_server.pyodbc',
-#        'NAME': 'instructores',
-#        'HOST': '25.59.146.27',
-#        'PORT': '1433',
-#        'USER': 'baseinstructor',
-#        'PASSWORD': '123',
-#        'OPTIONS': {
-#            'driver': 'ODBC Driver 17 for SQL Server',
-#        },
-#    },
+#    
 #}
 #
 
@@ -136,11 +130,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
