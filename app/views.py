@@ -38,7 +38,7 @@ def mostrar_registros(request):
     connection = psycopg2.connect(
         user="basecurso",
         password="123456",
-        host="25.10.16.136",
+        host="25.56.243.144",
         port="5432",
         database="registro",
         client_encoding='UTF8'
@@ -116,7 +116,7 @@ def procesar_formulario(request):
         connection = psycopg2.connect(
             user="basecurso",
             password="123456",
-            host="25.10.16.136",
+            host="25.56.243.144",
             port="5432",
             database="registro"
         )
