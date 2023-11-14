@@ -50,9 +50,17 @@ def mostrar_registros(request):
         # Crear un cursor para ejecutar operaciones con la base de datos
         cursor = connection.cursor()
 
-        # Ejecutar consulta SQL para seleccionar cada atributo de la tabla registro_curso 
-        cursor.execute("SELECT * FROM registro_curso")
-        
+        # Obtener el parámetro de la URL
+        filtro = request.GET.get('filtro', '')
+
+        # Ejecutar consulta SQL con filtro
+        if filtro == 'curso':
+            cursor.execute("SELECT * FROM registro_curso ORDER BY id_curso")
+        elif filtro == 'instructor':
+            cursor.execute("SELECT * FROM registro_curso ORDER BY id_instructor")
+        else:
+            cursor.execute("SELECT * FROM registro_curso")
+
         # Verificar si hay resultados
         if cursor.rowcount > 0:
             # Obtener todos los registros
@@ -93,7 +101,8 @@ def mostrar_registros(request):
         # Si la página solicitada está fuera de rango, mostrar la última página
         registros_pagina = paginator.page(paginator.num_pages)
 
-    return render(request, 'mostrar_registros.html', {'registros_pagina': registros_pagina})
+    return render(request, 'mostrar_registros.html', {'registros_pagina': registros_pagina, 'filtro': filtro})
+
 
 
 def procesar_formulario(request):
