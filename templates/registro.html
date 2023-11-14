@@ -106,7 +106,8 @@
         <h1>CURSOS</h1>
     </nav>
     <section>
-        <form action="" id="cursoForm">
+        <form action="{% url 'procesar_formulario' %}" method="POST" id="cursoForm">
+            {% csrf_token %}
             <h2>Registrar Curso</h2>
             <label for="nombreCurso">Curso</label>
             <select name="nombre" id="nombreCurso">
