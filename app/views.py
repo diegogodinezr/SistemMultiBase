@@ -1,6 +1,10 @@
 from django.shortcuts import render
 import pyodbc
 import pymongo
+from django.http import HttpResponse
+from django.shortcuts import render
+import psycopg2
+from psycopg2 import Error
 
 # Create your views here.
 def index(request):
@@ -11,7 +15,7 @@ def registro(request):
     mongo_client = pymongo.MongoClient('mongodb://daniel:belicon@25.10.16.136:27017/cursos')
     db_mongo = mongo_client['cursos']
     collection_mongo = db_mongo['curso']
-    infocurso = [{'id': curso['ID_Curso'], 'tema': curso['Tema']} for curso in collection_mongo.find()]
+    infocurso = [{'id_curso': curso['ID_Curso'], 'tema': curso['Tema']} for curso in collection_mongo.find()]
 
     # Código para obtener instructores de SQL Server
     server = '25.59.146.27'
@@ -28,6 +32,7 @@ def registro(request):
     instructores = [{'ID_instructor': row.ID_instructor, 'NombreCompleto': row.NombreCompleto} for row in rows]
 
     return render(request, 'registro.html', {'temas': infocurso, 'instructores': instructores})
+
 
 
 
@@ -59,9 +64,7 @@ def mostrarcursos(request):
 
     return render(request, 'cursos.html', {'instructor': rows, 'cursos': cursos_mongo})
 
-from django.shortcuts import render
-import psycopg2
-from psycopg2 import Error
+
 
 def mostrar_registros(request):
     # Parámetros de conexión a la base de datos PostgreSQL
@@ -114,3 +117,51 @@ def mostrar_registros(request):
             connection.close()
 
     return render(request, 'mostrar_registros.html', {'registros': registros})
+
+
+def procesar_formulario(request):
+    if request.method == 'POST':
+        nombre_curso = request.POST.get('curso_id')
+        nombre_instructor = request.POST.get('instructor_id')
+        fecha_inicio = request.POST.get('fechaInicio')
+        fecha_fin = request.POST.get('fechaFin')
+
+        # Conectar a la base de datos remota a través de la VPN
+        connection = psycopg2.connect(
+            user="basecurso",
+            password="123456",
+            host="25.10.16.136",
+            port="5432",
+            database="registro"
+        )
+
+        try:
+            # Crear un cursor para ejecutar operaciones con la base de datos remota
+            cursor = connection.cursor()
+
+            # Llamar al procedimiento almacenado en lugar de ejecutar una consulta SQL directa
+            print(f"Curso ID: {int(nombre_curso)}, Instructor ID: {int(nombre_instructor)}, Fecha Inicio: {fecha_inicio}, Fecha Fin: {fecha_fin}")
+            # Llamar al procedimiento almacenado utilizando CALL
+            cursor.execute("CALL insertar_registro_curso(%s, %s, %s, %s)", (int(nombre_curso), int(nombre_instructor), fecha_inicio, fecha_fin))
+
+
+
+
+            # Confirmar la transacción
+            connection.commit()
+
+            return HttpResponse('Registro exitoso')
+        except Error as e:
+            mensaje = f"Error al insertar en la base de datos remota: {e}"
+            print(mensaje)
+            return HttpResponse(mensaje)
+        finally:
+            # Cerrar el cursor y la conexión
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
+
+    else:
+        # Lógica para manejar otras solicitudes (GET)
+        return render(request, 'registro.html', context)

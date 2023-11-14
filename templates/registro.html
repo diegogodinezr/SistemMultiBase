@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +54,8 @@
             font-size: 40px;
         }
 
-        select, input {
+        select,
+        input {
             margin: 10px auto;
             padding: 10px;
             font-size: 16px;
@@ -91,13 +93,16 @@
             font-size: 22px;
             font-weight: bold;
             font-style: normal;
-            color:rgb(10, 18, 112);
+            color: rgb(10, 18, 112);
         }
     </style>
 </head>
+
 <body>
     <nav>
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M5 12l14 0" />
             <path d="M5 12l6 6" />
@@ -110,20 +115,21 @@
             {% csrf_token %}
             <h2>Registrar Curso</h2>
             <label for="nombreCurso">Curso</label>
-            <select name="nombre" id="nombreCurso">
+            <select name="curso_id" id="nombreCurso">
                 <option value="" disabled selected>Seleccione un curso</option>
                 {% for tema in temas %}
-                    <option value="{{ tema.id }}">{{ tema.tema }}</option>
+                <option value="{{ tema.id_curso }}">{{ tema.tema }}</option>
                 {% endfor %}
             </select>
 
             <label for="nombreInstructor">Instructor</label>
-            <select name="descripcion" id="nombreInstructor" disabled>
+            <select name="instructor_id" id="nombreInstructor" disabled>
                 <option value="" disabled selected>Seleccione un instructor</option>
                 {% for instructor in instructores %}
-                    <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
+                <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
                 {% endfor %}
             </select>
+
             <label for="fechaInicio">Fecha de inicio</label>
             <input type="date" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
             <label for="fechaFin">Fecha de fin</label>
@@ -134,7 +140,7 @@
 
     <script>
         const svgIcon = document.querySelector('.icon-tabler-arrow-left');
-        svgIcon.addEventListener('click', function() {
+        svgIcon.addEventListener('click', function () {
             window.history.back();
         });
 
@@ -142,7 +148,7 @@
         const nombreCursoInput = document.getElementById('nombreCurso');
         const nombreInstructorInput = document.getElementById('nombreInstructor');
 
-        nombreCursoInput.addEventListener('change', function() {
+        nombreCursoInput.addEventListener('change', function () {
             if (nombreCursoInput.value) {
                 nombreInstructorInput.removeAttribute('disabled');
             } else {
@@ -151,4 +157,5 @@
         });
     </script>
 </body>
+
 </html>
