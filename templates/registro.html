@@ -73,7 +73,8 @@
             border-radius: 10px;
         }
 
-        input[type="submit"] {
+        input[type="submit"],
+        button {
             background-color: rgba(45, 53, 129, 1);
             color: white;
             font-size: 20px;
@@ -84,7 +85,8 @@
             width: 25%;
         }
 
-        input[type="submit"]:hover {
+        input[type="submit"]:hover,
+        button:hover {
             background-color: rgba(68, 2, 79, 1);
         }
 
@@ -111,37 +113,50 @@
         <h1>CURSOS</h1>
     </nav>
     <section>
-        <form action="{% url 'procesar_formulario' %}" method="POST" id="cursoForm">
-            {% csrf_token %}
-            <h2>Registrar Curso</h2>
-            <label for="nombreCurso">Curso</label>
-            <select name="curso_id" id="nombreCurso">
-                <option value="" disabled selected>Seleccione un curso</option>
-                {% for tema in temas %}
-                <option value="{{ tema.id_curso }}">{{ tema.tema }}</option>
-                {% endfor %}
-            </select>
+        <div id="formularioWrapper">
+            <form action="{% url 'procesar_formulario' %}" method="POST" id="cursoForm">
+                {% csrf_token %}
+                <h2>Registrar Curso</h2>
+                <label for="nombreCurso">Curso</label>
+                <select name="curso_id" id="nombreCurso" required>
+                    <option value="" disabled selected>Seleccione un curso</option>
+                    {% for tema in temas %}
+                    <option value="{{ tema.id_curso }}">{{ tema.tema }}</option>
+                    {% endfor %}
+                </select>
 
-            <label for="nombreInstructor">Instructor</label>
-            <select name="instructor_id" id="nombreInstructor" disabled>
-                <option value="" disabled selected>Seleccione un instructor</option>
-                {% for instructor in instructores %}
-                <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
-                {% endfor %}
-            </select>
+                <label for="nombreInstructor">Instructor</label>
+                <select name="instructor_id" id="nombreInstructor" disabled required>
+                    <option value="" disabled selected>Seleccione un instructor</option>
+                    {% for instructor in instructores %}
+                    <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
+                    {% endfor %}
+                </select>
 
-            <label for="fechaInicio">Fecha de inicio</label>
-            <input type="date" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio">
-            <label for="fechaFin">Fecha de fin</label>
-            <input type="date" name="fechaFin" id="fechaFin" placeholder="Fecha Fin">
-            <input type="submit" value="Publicar">
-        </form>
+                <label for="fechaInicio">Fecha de inicio</label>
+                <input type="date" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio" required>
+                <label for="fechaFin">Fecha de fin</label>
+                <input type="date" name="fechaFin" id="fechaFin" placeholder="Fecha Fin" required>
+                <input type="submit" value="Publicar">
+
+            </form>
+        </div>
+        {% if registro_exitoso %}
+        <div id="mensajeExito">
+            <p style="font-size: 70px; color: green; font-weight: bold; margin-top: 10%;">Registro Exitoso</p>
+            <button type="button" id="publicarOtroCurso">Publicar otro curso</button>
+            <button id="volverAInicio">Volver a inicio</button>
+        </div>
+        {% endif %}
+
     </section>
+
+
 
     <script>
         const svgIcon = document.querySelector('.icon-tabler-arrow-left');
         svgIcon.addEventListener('click', function () {
-            window.history.back();
+            window.location.href = "{% url 'index' %}";
         });
 
         // Agrega un controlador de eventos para habilitar/deshabilitar el campo de instructor
@@ -155,6 +170,33 @@
                 nombreInstructorInput.setAttribute('disabled', 'disabled');
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formulario = document.getElementById("cursoForm");
+            const formularioWrapper = document.getElementById("formularioWrapper");
+            const mensajeExito = document.getElementById("mensajeExito");
+            const publicarOtroCursoBtn = document.getElementById("publicarOtroCurso");
+            const volverAInicioBtn = document.getElementById("volverAInicio");
+
+            if (mensajeExito) {
+                // Ocultar el formulario al cargar la página
+                formularioWrapper.style.display = "none";
+            }
+
+            publicarOtroCursoBtn.addEventListener("click", function () {
+                // Mostrar el formulario y ocultar el mensaje de éxito
+                formularioWrapper.style.display = "block";
+                mensajeExito.style.display = "none";
+
+                window.location.href = "{% url 'registro' %}";
+            });
+
+            volverAInicioBtn.addEventListener("click", function () {
+                // Redirigir a la página de inicio o a la URL deseada
+                window.location.href = "{% url 'index' %}";
+            });
+        });
+
     </script>
 </body>
 

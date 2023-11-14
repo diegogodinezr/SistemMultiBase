@@ -2,7 +2,7 @@ from django.shortcuts import render
 import pyodbc
 import pymongo
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage
 import psycopg2
 from psycopg2 import Error
 
@@ -83,7 +83,17 @@ def mostrar_registros(request):
         if connection:
             connection.close()
 
-    return render(request, 'mostrar_registros.html', {'registros': registros})
+    # Configurar la paginación
+    paginator = Paginator(registros, 15)  # Muestra 15 registros por página
+    page = request.GET.get('page', 1)  # Obtener el número de página de la solicitud GET
+
+    try:
+        registros_pagina = paginator.page(page)
+    except EmptyPage:
+        # Si la página solicitada está fuera de rango, mostrar la última página
+        registros_pagina = paginator.page(paginator.num_pages)
+
+    return render(request, 'mostrar_registros.html', {'registros_pagina': registros_pagina})
 
 
 def procesar_formulario(request):
@@ -113,19 +123,20 @@ def procesar_formulario(request):
 
             # Confirmar la transacción
             connection.commit()
-
-            return HttpResponse('Registro exitoso')
+            
+            registro_exitoso = True
         except Error as e:
             mensaje = f"Error al insertar en la base de datos remota: {e}"
             print(mensaje)
-            return HttpResponse(mensaje)
+            registro_exitoso = False
         finally:
             # Cerrar el cursor y la conexión
             if cursor:
                 cursor.close()
             if connection:
                 connection.close()
-
+# Actualizar el contexto con la variable registro_exitoso
+        return render(request, 'registro.html', {'registro_exitoso': registro_exitoso})
     else:
         # Lógica para manejar otras solicitudes (GET)
-        return render(request, 'registro.html', context)
+        return render(request, 'registro.html')
