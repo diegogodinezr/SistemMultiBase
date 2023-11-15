@@ -33,12 +33,13 @@ def registro(request):
 
     return render(request, 'registro.html', {'temas': infocurso, 'instructores': instructores})
 
-def mostrar_registros(request):
+
+def obtener_registros():
     # Parámetros de conexión a la base de datos PostgreSQL
-    connection = psycopg2.connect(
+    connection_postgres = psycopg2.connect(
         user="basecurso",
         password="123456",
-        host="25.56.243.144",
+        host="25.10.16.136",
         port="5432",
         database="registro",
         client_encoding='UTF8'
@@ -47,32 +48,53 @@ def mostrar_registros(request):
     registros = []
 
     try:
-        # Crear un cursor para ejecutar operaciones con la base de datos
-        cursor = connection.cursor()
+        # Crear un cursor para ejecutar operaciones con la base de datos PostgreSQL
+        cursor_postgres = connection_postgres.cursor()
 
-        # Obtener el parámetro de la URL
-        filtro = request.GET.get('filtro', '')
+        # Conectar a la base de datos SQL Server para obtener los nombres de los instructores
+        server_sql_server = '25.59.146.27'
+        database_sql_server = 'instructores'
+        username_sql_server = 'baseinstructor'
+        password_sql_server = '123'
+        connection_string_sql_server = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server_sql_server};DATABASE={database_sql_server};UID={username_sql_server};PWD={password_sql_server}'
+        conn_sql_server = pyodbc.connect(connection_string_sql_server)
+        cursor_sql_server = conn_sql_server.cursor()
 
-        # Ejecutar consulta SQL con filtro
-        if filtro == 'curso':
-            cursor.execute("SELECT * FROM registro_curso ORDER BY id_curso")
-        elif filtro == 'instructor':
-            cursor.execute("SELECT * FROM registro_curso ORDER BY id_instructor")
-        else:
-            cursor.execute("SELECT * FROM registro_curso")
+        # Ejecutar consulta SQL en SQL Server para obtener los nombres de los instructores
+        cursor_sql_server.execute("SELECT ID_instructor, CONCAT(Nombre, ' ', Primer_Apellido, ' ', Segundo_Apellido) AS NombreCompleto FROM Catalogo_instructores")
+        instructores_dict = {row[0]: row[1] for row in cursor_sql_server.fetchall()}
+
+        # Conectar a la base de datos MongoDB para obtener los temas de los cursos
+        mongo_client = pymongo.MongoClient('mongodb://daniel:belicon@25.10.16.136:27017/cursos')
+        db_mongo = mongo_client['cursos']
+        collection_mongo = db_mongo['curso']
+
+        # Crear un diccionario con los temas de los cursos
+        temas_dict = {curso['ID_Curso']: curso['Tema'] for curso in collection_mongo.find()}
+
+        # Ejecutar consulta SQL en PostgreSQL sin filtro
+        cursor_postgres.execute("SELECT * FROM registro_curso ORDER BY ID_Curso")
 
         # Verificar si hay resultados
-        if cursor.rowcount > 0:
+        if cursor_postgres.rowcount > 0:
             # Obtener todos los registros
-            records = cursor.fetchall()
+            records = cursor_postgres.fetchall()
 
             # Crear una lista de diccionarios para almacenar los registros
             for row in records:
+                # Obtener el nombre del instructor de la dict creada anteriormente
+                id_instructor = row[2]
+                nombre_instructor = instructores_dict.get(id_instructor, "")
+
+                # Obtener el tema del curso de la dict creada para MongoDB
+                ID_Curso = row[3]
+                tema_curso = temas_dict.get(ID_Curso, "")
+
                 registro = {
                     "id_registro": row[0],
                     "fecha_registro": row[1],
-                    "id_instructor": row[2],
-                    "id_curso": row[3],
+                    "nombre_instructor": nombre_instructor,
+                    "tema_curso": tema_curso,
                     "fecha_inicio": row[4],
                     "fecha_fin": row[5]
                 }
@@ -81,18 +103,29 @@ def mostrar_registros(request):
             print("No se encontraron resultados.")
 
     except Error as e:
-        mensaje = f"Error al conectar a la base de datos PostgreSQL: {e}"
+        mensaje = f"Error al conectar a la base de datos: {e}"
         print(mensaje)
 
     finally:
-        # Cerrar el cursor y la conexión si están definidos
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+        # Cerrar los cursores y las conexiones si están definidos
+        if cursor_postgres:
+            cursor_postgres.close()
+        if cursor_sql_server:
+            cursor_sql_server.close()
+        if connection_postgres:
+            connection_postgres.close()
+        if conn_sql_server:
+            conn_sql_server.close()
+        if mongo_client:
+            mongo_client.close()
 
+    return registros
+
+
+def mostrar_registros(request):
+    registros = obtener_registros()
     # Configurar la paginación
-    paginator = Paginator(registros, 15)  # Muestra 15 registros por página
+    paginator = Paginator(registros, 10)  # Muestra 15 registros por página
     page = request.GET.get('page', 1)  # Obtener el número de página de la solicitud GET
 
     try:
@@ -101,8 +134,7 @@ def mostrar_registros(request):
         # Si la página solicitada está fuera de rango, mostrar la última página
         registros_pagina = paginator.page(paginator.num_pages)
 
-    return render(request, 'mostrar_registros.html', {'registros_pagina': registros_pagina, 'filtro': filtro})
-
+    return render(request, 'mostrar_registros.html', {'registros_pagina': registros_pagina})
 
 
 def procesar_formulario(request):
@@ -116,7 +148,7 @@ def procesar_formulario(request):
         connection = psycopg2.connect(
             user="basecurso",
             password="123456",
-            host="25.56.243.144",
+            host="25.10.16.136",
             port="5432",
             database="registro"
         )
