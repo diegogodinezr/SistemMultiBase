@@ -64,14 +64,6 @@
             position: relative;
         }
 
-        .asc::after {
-            content: " ▲";
-        }
-
-        .desc::after {
-            content: " ▼";
-        }
-
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -113,39 +105,13 @@
         </svg>
         <h1>Registro de Curso</h1>
     </nav>
-    <form method="GET" action="{% url 'mostrar_registros' %}">
-        <label for="filtro">Filtrar por:</label>
-        <select name="filtro" id="filtro">
-            <option value="">Ninguno</option>
-            <option value="instructor">ID Instructor</option>
-            <option value="curso">ID Curso</option>
-            <!-- Agrega más opciones de filtrado según tus necesidades -->
-        </select>
-    
-        <label for="orden">Ordenar por:</label>
-        <select name="orden" id="orden">
-            <option value="">Ninguno</option>
-            <option value="asc">Menor a Mayor</option>
-            <option value="desc">Mayor a Menor</option>
-        </select>
-    
-        <input type="submit" value="Aplicar Filtros y Ordenar">
-    </form>
     <section>
         <table>
             <tr>
                 <th>ID Registro</th>
                 <th>Fecha Registro</th>
-                <th class="{% if filtro == 'instructor' %}{{ orden }}{% endif %}">
-                    <a href="?filtro=instructor&orden={{ orden_opuesto }}">ID Instructor</a>
-                </th>              
-                <th class="{% if filtro == 'curso' %}{{ orden }}{% endif %}">
-                    <a href="?filtro=curso&orden={{ orden_opuesto }}">
-                        ID Curso
-                        <span class="arrow-icon">{% if orden == 'asc' %}▲{% else %}▼{% endif %}</span>
-                    </a>
-                </th>
-                
+                <th>Nombre instructor</th>              
+                <th>Tema curso </th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
             </tr>
