@@ -1,0 +1,78 @@
+.antonioText1 {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    color: black;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin-top: 50px;
+}
+
+.social-media h3 {
+    color: black;
+    text-align: center;
+    text-transform: upercase;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.linea1 {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 3px;
+    background-color: #E00613;
+    z-index: 0;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    background-color: #000000;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+}
+
+/* Estilo general para los íconos dentro de .icon */
+.icon img {
+    filter: invert(1);
+}
+
+/* Tamaños específicos para cada ícono */
+.facebook-icon img {
+    width: auto; /* Cambiar solo el tamaño del ícono de Facebook */
+    height: 30px; /* Mantén la proporción */
+}
+
+.instagram-icon img {
+    width: 30px; /* Tamaño específico para Instagram */
+    height: auto; /* Mantén la proporción */
+}
+
+.whatsapp-icon img {
+    width: 30px; /* Tamaño específico para WhatsApp */
+    height: auto; /* Mantén la proporción */
+}
+
+.iconColor {
+    color: white;
+}

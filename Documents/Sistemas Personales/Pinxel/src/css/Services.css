@@ -1,0 +1,173 @@
+.antonioNav {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.antonioText {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.servicios {
+    border-top: 10px solid #E00613;
+    background-color: black;
+    color: #fff;
+    padding-bottom: 50px;
+}
+
+.title {
+    margin: 0 auto;
+    background-color: #E00613;
+    width: fit-content; /* Ajustar automáticamente según el contenido */
+    padding: 10px 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.title h2 {
+    font-size: 2.5em;
+    color: #fff;
+    text-align: center;
+}
+
+.servicios-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se muevan hacia abajo cuando no hay espacio */
+    justify-content: space-evenly;
+    margin-top: 80px;
+    padding: 0 100px; /* Añade padding a los lados para evitar que los elementos se peguen a los bordes */
+}
+
+.servicio {
+    display: flex;
+    flex-direction: row; /* Mantén los elementos en fila en pantallas grandes */
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 500px; /* Ajusta el ancho para permitir dos servicios por fila */
+    border-radius: 10px;
+}
+
+.line {
+    width: 8px;
+    background-color: #E00613;
+    height: 220px;
+    margin: 20px 20px;
+}
+
+.titulo {
+    padding: 20px 0 50px 60px; /* Mantén el padding superior e inferior y añade padding a la izquierda para separar del borde */
+}
+
+
+.titulo h3 {
+    font-size: 2.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.titulo .resaltado {
+    background-color: #E00613; /* Fondo rojo */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: -10px;
+}
+
+.lista {
+    width: 100%; /* Asegúrate de que la lista ocupe todo el ancho disponible */
+}
+
+.lista ul {
+    list-style-type: disc;
+    padding-left: 30px; /* Ajusta si es necesario */
+    margin: 0; /* Elimina el margen para ocupar todo el ancho */
+    width: 100%; /* Asegura que el ul ocupe el 100% */
+}
+
+.lista ul li {
+    font-size: 35px;
+    letter-spacing: 1px;
+    margin-bottom: -10px; /* Ajusta o elimina si es necesario */
+    white-space: nowrap; /* Evita que los elementos de la lista se dividan en varias líneas */
+}
+
+
+.lista ul li::marker {
+    color: #E00613;
+    font-size: 20px;
+}
+
+
+.servicio .img {
+    position: relative;
+    right: 50px;
+    top: 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    background-color: #fff;
+    margin-right: 5px; /* Reduce el margen para acercar la imagen al texto */
+    object-fit: contain; /* Ajusta la imagen al contenedor */
+}
+
+.design img {
+    position: absolute;
+
+    width: auto;
+    height: 70%;
+    margin-left: -30px;
+    margin-top: 10px;
+}
+
+.servicio .design {
+    right: 100px !important;
+}
+
+.impresion img {
+    width: auto;
+    height: 100%;
+    margin-left: -20px;
+    margin-top: -21px;
+}
+
+.servicio .instalacion {
+    right: 110px !important;
+}
+
+.instalacion img {
+    width: auto;
+    height: 100%;
+    margin-top: -21px;
+}
+
+
+/* Para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .servicios-container {
+        flex-direction: column; /* Cambia la dirección a columna en pantallas pequeñas */
+        align-items: center; /* Centra los servicios en pantallas pequeñas */
+    }
+
+    .servicio {
+        width: 100%; /* Los servicios ocupan el 100% del ancho disponible */
+        flex-direction: column; /* Coloca los elementos en columna */
+        align-items: center;
+        text-align: center;
+    }
+
+    .line {
+        width: 100%;
+        height: 8px; /* Cambia la línea a horizontal */
+        margin: 20px 0;
+    }
+
+    .titulo {
+        padding: 10px 0;
+    }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Registros</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+            margin-right: 60px;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+
+        .icon-tabler-arrow-left {
+            font-size: 45px;
+            float: left;
+            padding: 25px;
+        }
+
+        svg path:hover {
+            fill: rgba(45, 53, 129, 1);
+        }
+
+        section {
+            margin-top: 100px;
+            text-align: center;
+            /* Centrar el contenido de la sección */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            /* Centrar la tabla */
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: rgba(68, 2, 79, 1);
+            color: white;
+            position: relative;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .step-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .step-links a {
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+        }
+
+        .step-links .current {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M5 12l6 6" />
+            <path d="M5 12l6 -6" />
+        </svg>
+        <h1>Registro de Curso</h1>
+    </nav>
+    <section>
+        <table>
+            <tr>
+                <th>ID Registro</th>
+                <th>Fecha Registro</th>
+                <th>Nombre instructor</th>              
+                <th>Tema curso </th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+            </tr>
+            {% for registro in registros_pagina %}
+            <tr>
+                <td>{{ registro.id_registro }}</td>
+                <td>{{ registro.fecha_registro }}</td>
+                <td>{{ registro.nombre_instructor }}</td>
+                <td>{{ registro.tema_curso }}</td>
+                <td>{{ registro.fecha_inicio }}</td>
+                <td>{{ registro.fecha_fin }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if registros_pagina.has_previous %}
+                <a href="?page=1">&laquo; Primera</a>
+                <a href="?page={{ registros_pagina.previous_page_number }}">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ registros_pagina.number }} de {{ registros_pagina.paginator.num_pages }}.
+                </span>
+
+                {% if registros_pagina.has_next %}
+                <a href="?page={{ registros_pagina.next_page_number }}">Siguiente</a>
+                <a href="?page={{ registros_pagina.paginator.num_pages }}">Ultima &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </section>
+    <script>
+        const svgIcon = document.querySelector('.icon-tabler-arrow-left');
+        svgIcon.addEventListener('click', function () {
+            window.location.href = "{% url 'index' %}";
+        });
+    </script>
+</body>
+
+</html>

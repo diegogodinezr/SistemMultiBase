@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Curso</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+            margin-bottom: 0;
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+            margin-right: 60px;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+
+        .icon-tabler-arrow-left {
+            font-size: 45px;
+            float: left;
+            padding: 25px;
+        }
+
+        svg path:hover {
+            fill: rgba(45, 53, 129, 1);
+        }
+
+        section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 40px;
+        }
+
+        select,
+        input {
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            width: 30%;
+            text-align: center;
+        }
+
+        select {
+            border: 1px solid rgba(45, 53, 129, 1);
+            border-radius: 10px;
+        }
+
+        input[type="date"] {
+            border: 1px solid rgba(45, 53, 129, 1);
+            border-radius: 10px;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: rgba(45, 53, 129, 1);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            width: 25%;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        label {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            font-style: normal;
+            color: rgb(10, 18, 112);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="44" height="44"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M5 12l6 6" />
+            <path d="M5 12l6 -6" />
+        </svg>
+        <h1>CURSOS</h1>
+    </nav>
+    <section>
+        <div id="formularioWrapper">
+            <form action="{% url 'procesar_formulario' %}" method="POST" id="cursoForm">
+                {% csrf_token %}
+                <h2>Registrar Curso</h2>
+                <label for="nombreCurso">Curso</label>
+                <select name="curso_id" id="nombreCurso" required>
+                    <option value="" disabled selected>Seleccione un curso</option>
+                    {% for tema in temas %}
+                    <option value="{{ tema.id_curso }}">{{ tema.tema }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="nombreInstructor">Instructor</label>
+                <select name="instructor_id" id="nombreInstructor" disabled required>
+                    <option value="" disabled selected>Seleccione un instructor</option>
+                    {% for instructor in instructores %}
+                    <option value="{{ instructor.ID_instructor }}">{{ instructor.NombreCompleto }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="fechaInicio">Fecha de inicio</label>
+                <input type="date" name="fechaInicio" id="fechaInicio" placeholder="Fecha Inicio" required>
+                <label for="fechaFin">Fecha de fin</label>
+                <input type="date" name="fechaFin" id="fechaFin" placeholder="Fecha Fin" required>
+                <input type="submit" value="Publicar">
+
+            </form>
+        </div>
+        {% if registro_exitoso %}
+        <div id="mensajeExito">
+            <p style="font-size: 70px; color: green; font-weight: bold; margin-top: 10%;">Registro Exitoso</p>
+            <button type="button" id="publicarOtroCurso">Publicar otro curso</button>
+            <button id="volverAInicio">Volver a inicio</button>
+        </div>
+        {% endif %}
+
+    </section>
+
+
+
+    <script>
+        const svgIcon = document.querySelector('.icon-tabler-arrow-left');
+        svgIcon.addEventListener('click', function () {
+            window.location.href = "{% url 'index' %}";
+        });
+
+        // Agrega un controlador de eventos para habilitar/deshabilitar el campo de instructor
+        const nombreCursoInput = document.getElementById('nombreCurso');
+        const nombreInstructorInput = document.getElementById('nombreInstructor');
+
+        nombreCursoInput.addEventListener('change', function () {
+            if (nombreCursoInput.value) {
+                nombreInstructorInput.removeAttribute('disabled');
+            } else {
+                nombreInstructorInput.setAttribute('disabled', 'disabled');
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formulario = document.getElementById("cursoForm");
+            const formularioWrapper = document.getElementById("formularioWrapper");
+            const mensajeExito = document.getElementById("mensajeExito");
+            const publicarOtroCursoBtn = document.getElementById("publicarOtroCurso");
+            const volverAInicioBtn = document.getElementById("volverAInicio");
+
+            if (mensajeExito) {
+                // Ocultar el formulario al cargar la página
+                formularioWrapper.style.display = "none";
+            }
+
+            publicarOtroCursoBtn.addEventListener("click", function () {
+                // Mostrar el formulario y ocultar el mensaje de éxito
+                formularioWrapper.style.display = "block";
+                mensajeExito.style.display = "none";
+
+                window.location.href = "{% url 'registro' %}";
+            });
+
+            volverAInicioBtn.addEventListener("click", function () {
+                // Redirigir a la página de inicio o a la URL deseada
+                window.location.href = "{% url 'index' %}";
+            });
+        });
+
+        //Condiciones de fechas
+        document.addEventListener("DOMContentLoaded", function () {
+        const formulario = document.getElementById("cursoForm");
+        const fechaInicioInput = document.getElementById('fechaInicio');
+        const fechaFinInput = document.getElementById('fechaFin');
+
+        formulario.addEventListener('submit', function (event) {
+            // Obtener la fecha actual en el formato "YYYY-MM-DD"
+            const fechaActual = new Date().toISOString().split('T')[0];
+
+            // Validación 1: Fecha de inicio no puede ser menor que la fecha actual
+            if (fechaInicioInput.value < fechaActual) {
+                alert("La fecha de inicio no puede ser menor que la fecha actual.");
+                event.preventDefault(); // Evitar que el formulario se envíe
+                return;
+            }
+
+            // Validación 2: Fecha fin no puede ser mayor que fecha inicio
+            if (fechaFinInput.value < fechaInicioInput.value) {
+                alert("La fecha de fin no puede ser menor que la fecha de inicio.");
+                event.preventDefault(); // Evitar que el formulario se envíe
+            }
+        });
+    });
+
+    </script>
+</body>
+
+</html>

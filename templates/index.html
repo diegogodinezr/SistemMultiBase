@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: rgba(68, 2, 79, 1);
+        }
+
+        nav h1 {
+            margin: 0;
+            padding: 25px;
+            color: white;
+            font-size: 45px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .izquierda, .derecha {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .izquierda {
+            left: 15%;
+        }
+
+        .derecha {
+            right: 20%;
+        }
+
+        .izquierda input, .derecha input {
+            width: 100%;
+            font-size: 30px;
+            padding: 20px;
+            color: white;
+            background-color: rgba(121, 100, 251, 1);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .izquierda input:hover, .derecha input:hover {
+            background-color: rgba(45, 53, 129, 1);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>CURSOS</h1>
+    </nav>
+    <div class="container">
+        <div class="izquierda">
+            <a href="{% url 'registro' %}">
+                <input type="button" value="Registrarse a un curso">
+            </a>
+        </div>
+        <div class="derecha">
+            <a href="{% url 'mostrar_registros' %}"><input type="button" value="Ver Cursos"></a>
+        </div>
+    </div>
+</body>
+</html>

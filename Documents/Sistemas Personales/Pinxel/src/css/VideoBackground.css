@@ -1,0 +1,329 @@
+.antonioNav {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.video-background {
+    position: relative;
+    height: 97vh; /* Aumentado para que sea más alto */
+    width: 100vw; /* Asegura que ocupe todo el ancho */
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+
+.embed-responsive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+.vid::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa negra con 50% de opacidad */
+    z-index: 1; /* Asegura que la capa esté por encima del video */
+}
+
+
+
+.embed-responsive-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre todo el contenedor sin distorsión */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0.4);
+}
+
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 10;
+    text-align: center;
+}
+
+.content img {
+    width: 70vw;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.fondobtn {
+    display: inline-block; /* Cambiado para que el botón se ajuste a su contenido */
+    background-color: white;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 15px;
+    border-bottom: 5px solid white; /* Agrega una línea roja en la parte inferior */
+    padding: 0px 5px; /* Ajusta el padding para crear espacio alrededor del botón */
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 3px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Agrega sombra al fondo */
+    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.2s; /* Transición suave para el zoom */
+}
+
+.fondobtn:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del botón en un 10% */
+}
+
+.content button {
+    padding: 4px 35px; /* Ajusta el padding para un botón más grande */
+    font-size: 2.2rem; /* Tamaño del texto */
+    color: white; /* Color del texto */
+    background-color: #E00613; /* Color de fondo rojo */
+    border-radius: 15px; /* Bordes redondeados */
+    border: none; /* Eliminar el borde del botón */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    text-transform: uppercase; /* Texto en mayúsculas */
+}
+
+.content button:hover {
+    background-color: rgb(200, 25, 25);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+}
+
+/*Acomodamos el sello en la esquina superior derecha*/
+.sello {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    z-index: 10;
+}
+
+.sello img {
+    width: 250px;
+    height: auto;
+}
+
+/* Adaptación para pantallas grandes */
+
+
+@media (max-width: 1799px) {
+    .video-background {
+        height: 80vh;
+    }
+
+    .embed-responsive {
+        height: 85vh;
+    }
+
+    .content h1 {
+        font-size: 4rem;
+    }
+
+    .content button {
+        font-size: 2.5rem;
+        padding: 6px 40px;
+    }
+
+    .sello {
+        bottom: 50px;
+        right: 50px;
+    }
+
+    .sello img {
+        width: 200px;
+    }
+}
+
+/* Adaptación para pantallas medianas */
+@media (max-width: 1500px) {
+    .video-background {
+        height: 70vh;
+    }
+
+    .embed-responsive {
+        height: 75vh;
+    }
+
+    .content h1 {
+        font-size: 3rem;
+    }
+
+    .content button {
+        font-size: 2.3rem;
+        padding: 5px 38px;
+    }
+
+    .sello img {
+        width: 180px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .video-background {
+        height: 65vh;
+    }
+
+    .embed-responsive {
+        height: 60vh;
+    }
+
+    .content h1 {
+        font-size: 2.4rem;
+    }
+
+    .content button {
+        font-size: 2.1rem;
+        padding: 5px 35px;
+    }
+
+    .sello {
+        bottom: 100px;
+        right: 40px;
+    }
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 1050px) {
+    .video-background {
+        height: 50vh;
+    }
+
+    .embed-responsive {
+        height: 55vh;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .content button {
+        font-size: 1.8rem;
+        padding: 4px 30px;
+    }
+
+    .sello {
+        bottom: 20px;
+        right: 40px;
+    }
+
+    .sello img {
+        width: 140px;
+    }
+}
+
+@media (max-width: 850px) {
+    .video-background {
+        height: 40vh;
+    }
+
+    .embed-responsive {
+        height: 45vh;
+    }
+
+    .vid::after {
+        height: 100px;
+    }
+
+    .embed-responsive-item {
+        width: 50%;
+    }
+
+    .content {
+        width: 500px;
+    }
+
+    .content h1 {
+        font-size: 2.5rem;
+    }
+
+    .content button {
+        font-size: 1.6rem;
+        padding: 4px 25px;
+    }
+
+    .sello img {
+        width: 120px;
+    }
+}
+
+/* Adaptación para pantallas muy pequeñas */
+@media (max-width: 650px) {
+    .video-background {
+        height: 30vh;
+    }
+
+    .embed-responsive {
+        height: 35vh;
+    }
+
+    .content {
+        width: 450px;
+    }
+
+    .content img {
+        margin: 20px;
+    }
+
+    .content button {
+        font-size: 1.4rem;
+        padding: 3px 20px;
+    }
+
+    .sello {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .sello img {
+        width: 100px;
+    }
+}
+
+/* Adaptación para pantallas muy pequeñas */
+@media (max-width: 450px) {
+    .video-background {
+        height: 25vh;
+    }
+
+    .embed-responsive {
+        height: 30vh;
+    }
+
+    .content {
+        width: 400px;
+    }
+
+    .content img {
+        margin: 10px;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .content button {
+        font-size: 1.2rem;
+        padding: 3px 15px;
+    }
+
+    .sello {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .sello img {
+        width: 80px;
+    }
+}

@@ -1,0 +1,158 @@
+.round {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.antonioNav1 {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.antonioText1 {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.trabajos {
+    position: relative;
+    margin: 0;
+    display: grid;
+    place-items: center;
+}
+
+.titulo2 {
+    position: relative;
+    background-color: black;
+    color: #fff;
+    padding: 2px 30px 15px 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    font-size: 2.8rem;
+}
+
+.linea2 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #E00613;
+    height: 50px;
+    z-index: -1;
+}
+
+.carrousel {
+    margin: 50px 100px;
+    display: grid;
+    place-items: center;
+    height: 55vh;
+    z-index: 1;
+}
+
+.swiper {
+    width: 100%;
+    max-width: 80%;
+    height: 500px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilos para los botones de navegación personalizados */
+.custom-button-prev, .custom-button-next {
+    color: white;
+    background-color: #E00613;
+    padding: 5px;
+    position: absolute; /* Para que esté relativo a la sección .trabajos */
+    top: 50%; /* Centrado vertical */
+    transform: translateY(-50%);
+    width: 50px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    border: none;
+}
+
+/* Botón izquierdo */
+.custom-button-prev {
+    font-size: 80px;
+    left: 0; /* Para pegarlo al borde izquierdo de la sección .trabajos */
+}
+
+/* Botón derecho */
+.custom-button-next {
+    font-size: 80px;
+
+    right: 0; /* Para pegarlo al borde derecho de la sección .trabajos */
+}
+
+.fondobtn1 {
+    display: inline-block; /* Cambiado para que el botón se ajuste a su contenido */
+    background-color: rgb(0, 0, 0);
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 15px;
+    border-bottom: 5px solid rgb(0, 0, 0); /* Agrega una línea roja en la parte inferior */
+    padding: 0px 5px; /* Ajusta el padding para crear espacio alrededor del botón */
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 3px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Agrega sombra al fondo */
+    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.2s; /* Transición suave para el zoom */
+}
+
+.fondobtn1:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del botón en un 10% */
+}
+
+.fondobtn1 button {
+    padding: 4px 20px; /* Ajusta el padding para un botón más grande */
+    font-size: 2.2rem; /* Tamaño del texto */
+    color: white; /* Color del texto */
+    background-color: #E00613; /* Color de fondo rojo */
+    border-radius: 15px; /* Bordes redondeados */
+    border: none; /* Eliminar el borde del botón */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    text-transform: uppercase; /* Texto en mayúsculas */
+}
+
+.fondobtn1 button:hover {
+    background-color: rgb(200, 25, 25);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+}
+
+.trabajos h2 {
+    margin-top: 10px;
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: black;
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .custom-button-prev, .custom-button-next {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .custom-button-prev::after, .custom-button-next::after {
+        font-size: 35px;
+    }
+}

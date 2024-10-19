@@ -1,0 +1,133 @@
+.antonioNav {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.marcas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 50px;
+    text-transform: uppercase;
+    color: white;
+    position: relative;
+}
+
+
+/* Estilo del título h2 */
+.marcas h2 {
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1; /* Mantiene el h2 delante de la línea */
+    display: inline-block;
+    padding: 0 20px;
+    background-color: white; /* Si quieres un fondo blanco detrás del texto */
+    margin: 0;
+    line-height: 1.5; /* Ajuste de espacio vertical */
+}
+
+/* Estilo para el fondo blanco */
+.fondot {
+    background-color: #fff;
+}
+
+/* Estilo de la línea roja detrás del h2 */
+.linea {
+    position: absolute;
+    top: 16%; /* Centra la línea verticalmente respecto al h2 */
+    left: 0; /* Empieza en el borde izquierdo */
+    width: 100%; /* Ancho de la línea que cubre todo el contenedor padre */
+    height: 15px;
+    background-color: #E00613;
+    z-index: 0; /* Asegura que la línea esté detrás del h2 */
+}
+
+.marcas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Malla adaptable */
+    gap: 10px; /* Espaciado entre los elementos */
+    padding: 30px;
+    width: 100%;
+    justify-items: center;
+}
+
+.marca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 200px;
+    max-height: 250px; /* Limitar la altura de los contenedores */
+}
+
+.marca img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.marca img:hover {
+    filter: grayscale(0%);
+}
+
+/* Para mantener la línea y el h2 alineados en pantallas pequeñas */
+@media (max-width: 1850px) {
+    .marcas h2 {
+        font-size: 2rem; /* Disminuir el tamaño del título */
+        padding: 0 15px;
+    }
+
+    .linea {
+        top: 13.5%; /* Ajusta la posición de la línea en pantallas pequeñas si es necesario */
+    }
+}
+
+@media (max-width: 1600px) {
+    .marcas h2 {
+        font-size: 2rem; /* Disminuir el tamaño del título */
+        padding: 0 15px;
+    }
+
+    .linea {
+        top: 13%; /* Ajusta la posición de la línea en pantallas pequeñas si es necesario */
+    }
+}
+
+@media (max-width: 1364px) {
+    .marcas h2 {
+        font-size: 2rem; /* Disminuir el tamaño del título */
+        padding: 0 15px;
+    }
+
+    .linea {
+        top: 11.5%; /* Ajusta la posición de la línea en pantallas pequeñas si es necesario */
+    }
+}
+
+@media (max-width: 1100px) {
+    .marcas h2 {
+        font-size: 2rem; /* Disminuir el tamaño del título */
+        padding: 0 15px;
+    }
+
+    .linea {
+        top: 10.5%; /* Ajusta la posición de la línea en pantallas pequeñas si es necesario */
+    }
+}
+
+@media (max-width: 900px) {
+    .marcas h2 {
+        font-size: 2rem; /* Disminuir el tamaño del título */
+        padding: 0 15px;
+    }
+
+    .linea {
+        top: 8.5%; /* Ajusta la posición de la línea en pantallas pequeñas si es necesario */
+    }
+}
