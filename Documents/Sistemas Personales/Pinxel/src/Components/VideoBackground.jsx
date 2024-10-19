@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/VideoBackground.css'; // Asegúrate de crear este archivo CSS
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa Bootstrap
-import video from '../assets/VideoOficial.mp4';
+import videoOficial from '../assets/videoOficial.mp4';
 import Generando from '../assets//generandoSol.png'
 import Sello from '../assets/sello.png'
 
@@ -22,7 +22,7 @@ const VideoBackground = () => {
             <div className="container-fluid video-background">
                 <div className="embed-responsive embed-responsive-16by9">
                     <video autoPlay loop muted className="embed-responsive-item">
-                        <source src={ video } type="video/mp4" className='vid' />
+                        <source src={ videoOficial } type="video/mp4" className='vid' />
                     </video>
                 </div>
                 <div className="content">
